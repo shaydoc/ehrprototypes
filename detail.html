@@ -47,7 +47,9 @@ Age 53
 Wed, 23rd November 2016 9:45am
 </h5>
 
-<ul class="nav nav-pills" data-bind="foreach:assessments">
+<select class="form-control visible-xs" data-bind="options:assessments, value:selectedAssessment">
+ </select>
+<ul class="nav nav-pills hidden-xs" data-bind="foreach:assessments">
  <li data-bind="css:{active:$root.selectedAssessment() === $data }">
    <a href="#" data-bind="click:$root.selectedAssessment">
      <!-- ko text:$data --><!-- /ko -->
