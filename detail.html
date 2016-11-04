@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+<head>
+<style>
+@import url('https://shaydoc.github.io/NorthernIrelandGPData/css/site.css');
+.container {
+  margin-top: 40px;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin-bottom:20px;
+}
+
+h4::first-letter { /* Use :first-letter if support for IE 8 or earlier is needed */
+  color: red;
+  font-size: 130%;
+  text-transform:uppercase;
+}
+
+ 
+ ul.nav-pills li {
+   /*font-size:1.2em;*/
+   border: solid 1px #337ab7;
+ }
+ 
+ ul.nav-pills li:hover,ul.nav-pills li a:hover
+ {
+   background-color:#337ab7;
+   color:#eee;
+ }
+</style>
+</head>
+<body>
+<div class="container">
+<h2>
+John Doe - <!-- ko text:selectedAssessment --><!-- /ko --> Assesment
+</h2>
+<h4>
+Age 53
+</h4>
+<h5>
+Wed, 23rd November 2016 9:45am
+</h5>
+
+<ul class="nav nav-pills" data-bind="foreach:assessments">
+ <li data-bind="css:{active:$root.selectedAssessment() === $data }">
+   <a href="#" data-bind="click:$root.selectedAssessment">
+     <!-- ko text:$data --><!-- /ko -->
+   </a>
+ </li>
+</ul>
+
+<!-- ko if: selectedAssessment()=== 'Summary' -->
+<div class="card">
+ <div class="card-content">
+   <h4>
+    Key Factors
+   </h4>
+   <ul>
+      <li><label class="badge">Impression - At risk</label></li>
+      <li><label class="badge">AVPU - Responds purposfully to Pain</label></li>
+      <li><label class="badge">Blood Pressure - 165/139</label></li>
+      <li><label class="badge">Low BMI</label></li>
+   </ul>
+ </div>
+ </div>
+<!-- /ko -->
+
+<!-- ko if: selectedAssessment()=== 'Airway' -->
+<!-- ko foreach: Object.keys(airwayOptions) -->
+<div class="card">
+ <div class="card-content">
+ <h4>
+  <!-- ko text:$data -->
+    <!-- /ko -->
+</h4>
+<ul class="nav nav-pills" data-bind="foreach:$parent.airwayOptions[$data]">
+  <li>
+  <a href="#">
+    <!-- ko text:$data -->
+    <!-- /ko -->
+   </a>
+  </li>
+</ul>
+ 
+ </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if: selectedAssessment()=== 'Respiratory' -->
+<!-- ko foreach: Object.keys(respiratoryOptions) -->
+<div class="card">
+ <div class="card-content">
+ <h4>
+  <!-- ko text:$data -->
+    <!-- /ko -->
+</h4>
+<ul class="nav nav-pills" data-bind="foreach:$parent.respiratoryOptions[$data]">
+  <li>
+  <a href="#">
+    <!-- ko text:$data -->
+    <!-- /ko -->
+   </a>
+  </li>
+</ul>
+ 
+ </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+
+<!-- ko if: selectedAssessment()=== 'Cardio' -->
+<!-- ko foreach: Object.keys(cardioOptions) -->
+<div class="card">
+ <div class="card-content">
+ <h4>
+  <!-- ko text:$data -->
+    <!-- /ko -->
+</h4>
+<ul class="nav nav-pills" data-bind="foreach:$parent.cardioOptions[$data]">
+  <li>
+  <a href="#">
+    <!-- ko text:$data -->
+    <!-- /ko -->
+   </a>
+  </li>
+</ul>
+ 
+ </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+
+<!-- ko if: selectedAssessment()=== 'Neurological' -->
+<!-- ko foreach: Object.keys(neurologicalOptions) -->
+<div class="card">
+ <div class="card-content">
+ <h4>
+  <!-- ko text:$data -->
+    <!-- /ko -->
+</h4>
+<ul class="nav nav-pills" data-bind="foreach:$parent.neurologicalOptions[$data]">
+  <li>
+  <a href="#">
+    <!-- ko text:$data -->
+    <!-- /ko -->
+   </a>
+  </li>
+</ul>
+ 
+ </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+
+
+ 
+
+
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js" ></script>
+<script>
+function AirwayAssessmentVM() {
+  var self = this;
+  self.assessments = ['Summary','Airway','Respiratory','Cardio','Neurological'];
+  self.selectedAssessment = ko.observable('Summary');
+  self.props = ['avpu','oropharynx', ]
+  self.airwayOptions =    {
+      impression: ['At risk', 'Not at risk', 'Complete obstruction', 'Partial obstruction'],
+      avpu: ['Fully Alert', 'Responds normally to Voice', 'Responds purposfully to Pain', 'Unresponsive'],
+      oropharynx: ['MP1', 'MP2', 'MP3', 'MP4'],
+      dentition: ['Normal', 'Prominent', 'Partial dentition', 'Edentulous'],
+      neck: ['Normal', 'Restricted ROM', 'Short and thick', 'Nearly no neck', 'Very long'],
+      genHabitus: ['Low BMI', 'Normal BMI', 'Overweight', 'Obese', 'Morbidly obese'],
+      voice: ['Altered', 'Normal'],
+      extraSounds: ['Snoring', 'Stidor', 'None'],
+      airwayBurnRisk: ['None'],
+      lastED: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, '> 12'],
+      injuryLastMeanInterval: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, '>12 ']
+    
+    };
+    
+    self.respiratoryOptions = {
+        impression: ['At risk', 'Not at risk'],
+       rate:["Option1","Option2","Option3","Option4","Option5"],
+       symmetry:["Option1","Option2","Option3","Option4","Option5"],
+       volume:["Option1","Option2","Option3","Option4","Option5"],
+       definition:["Option1","Option2","Option3","Option4","Option5"],
+       effort:["Option1","Option2","Option3","Option4","Option5"]
+    };
+    
+    self.cardioOptions = {
+      impression: ['At risk', 'Not at risk'],
+       heartRate:["Option1","Option2","Option3","Option4","Option5"],
+       radialPulse:["Option1","Option2","Option3","Option4","Option5"],
+       systolicBP:["Option1","Option2","Option3","Option4","Option5"],
+       diastolicBP:["Option1","Option2","Option3","Option4","Option5"]
+       
+       };
+       
+    self.neurologicalOptions = {
+       impression: ['None','Mild', 'Moderate','Severe'],
+       avpu:["Option1","Option2","Option3","Option4","Option5"],
+       gcs:["Option1","Option2","Option3","Option4","Option5"],
+       eyes:["Option1","Option2","Option3","Option4","Option5"],
+       voice:["Option1","Option2","Option3","Option4","Option5"],
+       nerves:["Option1","Option2","Option3","Option4","Option5"],
+       poct:["Option1","Option2","Option3","Option4","Option5"]
+    };
+
+
+}
+
+
+ko.applyBindings(new AirwayAssessmentVM());
+
+</script>
+</body>
+</html>
