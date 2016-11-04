@@ -65,7 +65,7 @@ Patient Assessments
    </h3>
    <form>
      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Patient Name or HSC" />
+        <input type="text" class="form-control" placeholder="Patient Name or HSC" data-bind="value:filter, valueUpdate:'input'" />
      </div>
      <div class="form-group">
          <button type="submit" class="btn btn-success">
@@ -76,7 +76,7 @@ Patient Assessments
     </div>
   </div>
 
-  <!-- ko foreach:patients -->
+  <!-- ko foreach:filteredPatients -->
   <div class="card">
     <div class="card-content">
       <h4>
@@ -138,7 +138,15 @@ function PatientAssessmentsVM() {
 
   ]);
 
-
+   self.filter = ko.observable();
+   self.filteredPatients = ko.computed(function(){
+      if (self.filter()){
+          return ko.utils.arrayFilter(self.patients(),function(item){
+             return item.name.toLowerCase().indexOf(self.filter().toLowerCase()) > -1;
+          });
+      }
+      return self.patients();
+   },self);
 }
 
 
