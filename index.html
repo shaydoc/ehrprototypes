@@ -87,7 +87,7 @@ Patient Assessments
        <h5>
        Past Assessments (red = missed)
        </h5>
-      <ul class="nav nav-pills" data-bind="foreach:assessments">
+      <ul class="nav nav-pills nav-stacked" data-bind="foreach:assessments">
         <li  data-bind="css:{'btn-danger':$parent.missed === $data, 'btn-success':$parent.missed !== $data }">
           <a  href="detail.html">
             <i class="fa fa-calendar"></i>  <!-- ko text:$data -->
