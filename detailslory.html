@@ -319,7 +319,7 @@ Wed, 23rd November 2016 9:45am
           <div class="slider js_simple simple" data-bind="css:$data">
             <div class="frame js_frame">
               <ul class="slides js_slides" data-bind="foreach:{data: $root.airwayOptions[$data] }">
-                <li class="js_slide">
+                <li class="js_slide" data-bind="event:{dblclick:$root.markOb}">
                   <!-- ko text:$data -->
                   <!-- /ko -->
                 </li>
@@ -531,7 +531,14 @@ function AirwayAssessmentVM() {
  
   }
 
-
+    self.markOb = function(){
+        if (arguments[1].target.style.backgroundColor==""){
+            arguments[1].target.style.backgroundColor="green";
+        }
+        else{
+         arguments[1].target.style.backgroundColor="";
+       }
+   }
 
 }
 
