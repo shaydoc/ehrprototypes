@@ -308,7 +308,7 @@ Wed, 23rd November 2016 9:45am
       <!-- /ko -->
 
       <!-- ko if: selectedAssessment()=== 'Airway' -->
-      <!-- ko foreach: Object.keys(airwayOptions) -->
+       <!-- ko foreach:{data: Object.keys(airwayOptions), afterRender:$root.runLory} -->
       <div class="card">
         <div class="card-content">
           <h4>
@@ -316,7 +316,7 @@ Wed, 23rd November 2016 9:45am
     <!-- /ko -->
 </h4>
 
-          <div class="slider js_simple simple" data-bind="css:$data,template:{afterRender:$root.runLory}">
+          <div class="slider js_simple simple" data-bind="css:$data">
             <div class="frame js_frame">
               <ul class="slides js_slides" data-bind="foreach:{data: $root.airwayOptions[$data] }">
                 <li class="js_slide">
@@ -348,14 +348,15 @@ Wed, 23rd November 2016 9:45am
       <!-- /ko -->
       <!-- /ko -->
       <!-- ko if: selectedAssessment()=== 'Respiratory' -->
-      <!-- ko foreach: Object.keys(respiratoryOptions) -->
+   <!-- ko foreach:{data: Object.keys(respiratoryOptions), afterRender:$root.runLory} -->
+    
       <div class="card">
         <div class="card-content">
           <h4>
   <!-- ko text:$data -->
     <!-- /ko -->
 </h4>
-           <div class="slider js_simple simple" data-bind="css:$data,template:{afterRender:$root.runLory}">
+           <div class="slider js_simple simple" data-bind="css:$data">
             <div class="frame js_frame">
               <ul class="slides js_slides" data-bind="foreach:{data: $root.respiratoryOptions[$data] }">
                 <li class="js_slide">
@@ -387,14 +388,15 @@ Wed, 23rd November 2016 9:45am
       <!-- /ko -->
 
       <!-- ko if: selectedAssessment()=== 'Cardio' -->
-      <!-- ko foreach: Object.keys(cardioOptions) -->
+   <!-- ko foreach:{data: Object.keys(cardioOptions), afterRender:$root.runLory} -->
+       
       <div class="card">
         <div class="card-content">
           <h4>
   <!-- ko text:$data -->
     <!-- /ko -->
 </h4>
-  <div class="slider js_simple simple" data-bind="css:$data,template:{afterRender:$root.runLory}">
+  <div class="slider js_simple simple" data-bind="css:$data">
             <div class="frame js_frame">
               <ul class="slides js_slides" data-bind="foreach:{data: $root.cardioOptions[$data] }">
                 <li class="js_slide">
@@ -426,14 +428,14 @@ Wed, 23rd November 2016 9:45am
       <!-- /ko -->
 
       <!-- ko if: selectedAssessment()=== 'Neurological' -->
-      <!-- ko foreach: Object.keys(neurologicalOptions) -->
+       <!-- ko foreach:{data: Object.keys(neurologicalOptions), afterRender:$root.runLory} -->
       <div class="card">
         <div class="card-content">
           <h4>
   <!-- ko text:$data -->
     <!-- /ko -->
 </h4>
-              <div class="slider js_simple simple" data-bind="css:$data,template:{afterRender:$root.runLory}">
+              <div class="slider js_simple simple" data-bind="css:$data">
             <div class="frame js_frame">
               <ul class="slides js_slides" data-bind="foreach:{data: $root.neurologicalOptions[$data] }">
                 <li class="js_slide">
@@ -520,16 +522,14 @@ function AirwayAssessmentVM() {
     poct: ["Option1", "Option2", "Option3", "Option4", "Option5"]
   };
 
-  self.runLory = function(css) {
-
-    Array.prototype.slice.call(document.querySelectorAll('.js_simple')).forEach(function (element, index) {
-    lory(element, {
+  self.runLory = function() {
+    var el = document.querySelectorAll('.' + arguments[1]);
+    lory(el[0], {
       infinite: 1,
       enableMouseEvents: true
-    });
-
-  });
-
+   });
+ 
+  }
 
 }
 
