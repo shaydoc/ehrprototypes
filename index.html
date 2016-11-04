@@ -89,7 +89,7 @@ Patient Assessments
        </h5>
       <ul class="nav nav-pills" data-bind="foreach:assessments">
         <li  data-bind="css:{'btn-danger':$parent.missed === $data, 'btn-success':$parent.missed !== $data }">
-          <a href="#">
+          <a  href="detail.html">
             <i class="fa fa-calendar"></i>  <!-- ko text:$data -->
             <!-- /ko -->
           </a>
@@ -99,9 +99,9 @@ Patient Assessments
      
     </div>
     <div class="card-content">
-       <button type="submit" class="btn btn-info">
+       <a href="detail.html" class="btn btn-info">
            <i class="fa fa-plus"></i>  Record Assessment
-         </button>    
+         </a>    
     </div>
   </div>
   <!-- /ko -->
